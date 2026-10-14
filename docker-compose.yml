@@ -1,0 +1,20 @@
+# Host networking is recommended: Steam relay often fails behind Docker bridge NAT.
+# See README.md for Unraid and port notes.
+
+services:
+  reskate:
+    image: reskate-docker:local
+    build:
+      context: .
+      args:
+        RESKATE_RELEASE: latest
+    network_mode: host
+    restart: unless-stopped
+    volumes:
+      - ./data:/server
+    environment:
+      # Optional — applied to ReSkateServer.json on each start when set:
+      # STEAM_TOKEN: ""
+      # LISTED: "true"
+      # SERVER_PORT: "27015"
+      # QUERY_PORT: "27016"
